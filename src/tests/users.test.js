@@ -190,4 +190,35 @@ describe('Requisito 6:', () => {
 
 });
 
+describe('Requisito 7:', () => {
+  test('Ao clicar no cabeçalho da tabela na palavra Idade, ordene de forma decrescente depois crescente', () => {
+    renderWithRouterAndStore(<Home />, '/');
+    const nameInput = screen.getByTestId("name-input");
+    const ageInput = screen.getByTestId("age-input");
+    const button = screen.getByText(/Salvar/i);
+
+    userEvent.type(nameInput, 'Tutancâmon');
+    userEvent.type(ageInput, '2000');
+    fireEvent.click(button);
+
+    userEvent.type(nameInput, 'Baby Boomer');
+    userEvent.type(ageInput, '1');
+    fireEvent.click(button);
+
+    let nameFields;
+    nameFields = screen.getAllByTestId("name-field");
+    const len = nameFields.length - 1;
+
+    expect(nameFields[0]).toHaveTextContent('Tutancâmon');
+    expect(nameFields[len]).toHaveTextContent('Baby Boomer');
+
+    const ageTitle = screen.getByTestId("age-title");
+    fireEvent.click(ageTitle);
+
+    nameFields = screen.getAllByTestId("name-field");
+    expect(nameFields[0]).toHaveTextContent('Baby Boomer');
+    expect(nameFields[len]).toHaveTextContent('Tutancâmon');
+  });
+});
+
 

@@ -32,8 +32,8 @@ function UserCard({ user, removeUser, updateUser }) {
     return (
       <tbody>
         <tr>
-          <td className="table-row">{ user.name }</td>
-          <td className="table-row">{ user.age }</td>
+          <td className="table-row" data-testid="name-field">{ user.name }</td>
+          <td className="table-row" data-testid="age-field">{ user.age }</td>
           <td className="table-row">
             <button onClick={ () => confirmDelete(user.id) } className="button-row">
               Deletar

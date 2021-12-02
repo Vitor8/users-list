@@ -68,7 +68,9 @@ function UsersTable({ usersArray, checkSessionStorage }) {
         <thead>
           <tr>
             <th className="table-title">Nome</th>
-            <th className="table-title" onClick={ () => handleOrder() }>Idade</th>
+            <th className="table-title" onClick={ () => handleOrder() } data-testid="age-title">
+              Idade
+            </th>
             <th className="table-title">-</th>
             <th className="table-title">-</th>
           </tr>
