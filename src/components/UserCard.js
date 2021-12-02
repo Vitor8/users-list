@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import * as userActions from '../actions/index';
+import '../css/Home.css';
 
 function UserCard({ user, removeUser, updateUser }) {
   const [newName, setNewName] = useState('');
@@ -32,8 +33,16 @@ function UserCard({ user, removeUser, updateUser }) {
       <tr>
         <td className="table-row">{ user.name }</td>
         <td className="table-row">{ user.age }</td>
-        <td><button onClick={ () => confirmDelete(user.id) }>D</button></td>
-        <td><button onClick={ () => setIsUserBeingUpdated(!isUserBeingUpdated)}>U</button></td>
+        <td className="table-row">
+          <button onClick={ () => confirmDelete(user.id) } className="button-row">
+            Deletar
+          </button>
+        </td>
+        <td className="table-row">
+          <button onClick={ () => setIsUserBeingUpdated(!isUserBeingUpdated)} className="button-row">
+            Atualizar
+          </button>
+        </td>
       </tr>
     );
   }
@@ -41,29 +50,36 @@ function UserCard({ user, removeUser, updateUser }) {
   function updatingRow() {
     return (
       <tr>
-
-        <td className="input-name-div">
+        <td className="table-row">
           <input 
             type="text"
-            className="input-name-text"
-            placeholder="New Name..."
+            className="update-field"
+            placeholder="Name..."
             onChange={ (e) => setNewName(e.target.value) }
             value={ newName }
           />
         </td>
 
-        <td className="input-age-div">
+        <td className="table-row">
           <input 
             type="text"
-            className="input-age-text"
-            placeholder="New Age..."
+            className="update-field"
+            placeholder="Age..."
             onChange={ (e) => setNewAge(e.target.value) }
             value={ newAge }
           />
         </td>
 
-        <td><button onClick={ () => prepareToUpdateUser() }>U</button></td>
-        <td><button onClick={ () => cancelUpdate() }>C</button></td>
+        <td className="table-row">
+          <button onClick={ () => cancelUpdate() } className="button-row">
+            Cancelar
+          </button>
+        </td>
+        <td className="table-row">
+          <button onClick={ () => prepareToUpdateUser() } className="button-row">
+            Atualizar
+          </button>
+        </td>
       </tr>
     );
   }

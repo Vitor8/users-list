@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as userActions from '../actions/index';
 import UserCard from './UserCard';
+import '../css/Home.css'
 
 function UsersTable({ usersArray, checkSessionStorage }) {
   const [usersArrayOrderByAge, setOrder] = useState([]);
@@ -63,7 +64,7 @@ function UsersTable({ usersArray, checkSessionStorage }) {
 
   return (
     <div>
-      <table>
+      <table className="table-container">
         <tr>
           <th className="table-title">Nome</th>
           <th className="table-title" onClick={ () => handleOrder() }>Idade</th>

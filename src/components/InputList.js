@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import * as userActions from '../actions/index';
 
+import '../css/Home.css';
+
 function InputList({ addUser, usersArray }) {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
@@ -13,7 +15,7 @@ function InputList({ addUser, usersArray }) {
 
   function newUser(name, age) {
     const isNameRepeated = isNameAlreadyRegistered(name);
-    if (isNameRepeated) return alert('Nome já regeistrado');
+    if (isNameRepeated) return alert('Nome já registrado');
 
     addUser(name, age);
     setName('');
@@ -21,33 +23,35 @@ function InputList({ addUser, usersArray }) {
   }
 
   return (
-    <div>
-      <div className="input-name-div">
+    <div className="input-container">
+
+      <div className="input-card">
         <label>Nome</label>
         <input 
           type="text"
-          className="input-name-text"
+          className="input-text"
           onChange={ (e) => setName(e.target.value) }
           value={ name }
         />
       </div>
 
-      <div className="input-age-div">
+      <div className="input-card">
         <label>Idade</label>
         <input
           type="text"
-          className="input-age-text"
+          className="input-text"
           onChange={ (e) => setAge(e.target.value) }
           value={ age }
         />
       </div>
 
       <button
-        className="add-button"
+        className="save-button"
         onClick={ () => newUser(name, age) }
       >
         Salvar
       </button>
+
     </div>
   );
 }
