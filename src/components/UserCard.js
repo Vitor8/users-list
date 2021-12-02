@@ -30,57 +30,61 @@ function UserCard({ user, removeUser, updateUser }) {
 
   function normalRow() {
     return (
-      <tr>
-        <td className="table-row">{ user.name }</td>
-        <td className="table-row">{ user.age }</td>
-        <td className="table-row">
-          <button onClick={ () => confirmDelete(user.id) } className="button-row">
-            Deletar
-          </button>
-        </td>
-        <td className="table-row">
-          <button onClick={ () => setIsUserBeingUpdated(!isUserBeingUpdated)} className="button-row">
-            Atualizar
-          </button>
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <td className="table-row">{ user.name }</td>
+          <td className="table-row">{ user.age }</td>
+          <td className="table-row">
+            <button onClick={ () => confirmDelete(user.id) } className="button-row">
+              Deletar
+            </button>
+          </td>
+          <td className="table-row">
+            <button onClick={ () => setIsUserBeingUpdated(!isUserBeingUpdated)} className="button-row">
+              Atualizar
+            </button>
+          </td>
+        </tr>
+      </tbody>
     );
   }
 
   function updatingRow() {
     return (
-      <tr>
-        <td className="table-row">
-          <input 
-            type="text"
-            className="update-field"
-            placeholder="Name..."
-            onChange={ (e) => setNewName(e.target.value) }
-            value={ newName }
-          />
-        </td>
+      <tbody>
+        <tr>
+          <td className="table-row">
+            <input 
+              type="text"
+              className="update-field"
+              placeholder="Name..."
+              onChange={ (e) => setNewName(e.target.value) }
+              value={ newName }
+            />
+          </td>
 
-        <td className="table-row">
-          <input 
-            type="text"
-            className="update-field"
-            placeholder="Age..."
-            onChange={ (e) => setNewAge(e.target.value) }
-            value={ newAge }
-          />
-        </td>
+          <td className="table-row">
+            <input 
+              type="text"
+              className="update-field"
+              placeholder="Age..."
+              onChange={ (e) => setNewAge(e.target.value) }
+              value={ newAge }
+            />
+          </td>
 
-        <td className="table-row">
-          <button onClick={ () => cancelUpdate() } className="button-row">
-            Cancelar
-          </button>
-        </td>
-        <td className="table-row">
-          <button onClick={ () => prepareToUpdateUser() } className="button-row">
-            Atualizar
-          </button>
-        </td>
-      </tr>
+          <td className="table-row">
+            <button onClick={ () => cancelUpdate() } className="button-row">
+              Cancelar
+            </button>
+          </td>
+          <td className="table-row">
+            <button onClick={ () => prepareToUpdateUser() } className="button-row">
+              Atualizar
+            </button>
+          </td>
+        </tr>
+      </tbody>
     );
   }
 

@@ -65,12 +65,14 @@ function UsersTable({ usersArray, checkSessionStorage }) {
   return (
     <div>
       <table className="table-container">
-        <tr>
-          <th className="table-title">Nome</th>
-          <th className="table-title" onClick={ () => handleOrder() }>Idade</th>
-          <th className="table-title">-</th>
-          <th className="table-title">-</th>
-        </tr>
+        <thead>
+          <tr>
+            <th className="table-title">Nome</th>
+            <th className="table-title" onClick={ () => handleOrder() }>Idade</th>
+            <th className="table-title">-</th>
+            <th className="table-title">-</th>
+          </tr>
+        </thead>
         {
           hasCheckedSessionStorage && usersArrayOrderByAge.map((user) => <UserCard key={user.id} user={user} />)
         }

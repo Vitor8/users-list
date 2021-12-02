@@ -26,20 +26,22 @@ function InputList({ addUser, usersArray }) {
     <div className="input-container">
 
       <div className="input-card">
-        <label>Nome</label>
+        <label data-testid="name-label">Nome</label>
         <input 
           type="text"
           className="input-text"
+          data-testid="name-input"
           onChange={ (e) => setName(e.target.value) }
           value={ name }
         />
       </div>
 
       <div className="input-card">
-        <label>Idade</label>
+        <label data-testid="age-label">Idade</label>
         <input
           type="text"
           className="input-text"
+          data-testid="age-input"
           onChange={ (e) => setAge(e.target.value) }
           value={ age }
         />
@@ -47,6 +49,7 @@ function InputList({ addUser, usersArray }) {
 
       <button
         className="save-button"
+        type="submit"
         onClick={ () => newUser(name, age) }
       >
         Salvar
