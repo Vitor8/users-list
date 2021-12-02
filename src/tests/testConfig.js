@@ -22,7 +22,13 @@ export const renderWithRouterAndStore = (component, routeConfigs = {}, initialSt
   return {
     ...render(
       <Provider store={ store }>
-        <Router history={ history }>{component}</Router>
+        <Router
+          location={ history }
+          navigator={ history }
+          history={ history }
+        >
+          {component}
+        </Router>
       </Provider>,
     ),
     history,
