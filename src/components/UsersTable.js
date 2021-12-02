@@ -3,11 +3,25 @@ import { connect } from 'react-redux';
 import UserCard from './UserCard';
 
 function UsersTable({ usersArray }) {
-  const [usersArrayOrderByAgeDec, setOrderDec] = useState([]);
+  const [usersArrayOrderByAge, setOrder] = useState([]);
+  const [controlOrder, setControlOrder] = useState('dec');
 
   useEffect(() => {
-    orderByAgeDec();
+    if (controlOrder === 'asc') orderByAgeAsc();
+    if (controlOrder === 'dec') orderByAgeDec();
   },[usersArray]);
+
+  function handleOrder() {
+    if (controlOrder === 'dec') {
+      orderByAgeAsc();
+      setControlOrder('asc');
+    } 
+    
+    if (controlOrder === 'asc') {
+      orderByAgeDec();
+      setControlOrder('dec');
+    }
+  }
 
   function orderByAgeDec() {
     let usersArrayDec = usersArray;
@@ -20,7 +34,21 @@ function UsersTable({ usersArray }) {
         }
       }
     }
-    setOrderDec(usersArrayDec);
+    setOrder(usersArrayDec);
+  }
+
+  function orderByAgeAsc() {
+    let usersArrayAsc = usersArray;
+    for (let i = 0; i < usersArrayAsc.length; i++) {
+      for (let j = 0; j < (usersArrayAsc.length - i - 1); j++) {
+        if (parseInt(usersArrayAsc[j].age,10) > parseInt(usersArrayAsc[j + 1].age,10)) {
+          let help = usersArrayAsc[j];
+          usersArrayAsc[j] = usersArrayAsc[j + 1];
+          usersArrayAsc[j + 1] = help;
+        }
+      }
+    }
+    setOrder(usersArrayAsc);
   }
 
   return (
@@ -28,11 +56,11 @@ function UsersTable({ usersArray }) {
       <table>
         <tr>
           <th className="table-title">Nome</th>
-          <th className="table-title">Idade</th>
+          <th className="table-title" onClick={ () => handleOrder() }>Idade</th>
           <th className="table-title">-</th>
           <th className="table-title">-</th>
         </tr>
-        { usersArrayOrderByAgeDec.map((user) => <UserCard key={user.id} user={user} />) }
+        { usersArrayOrderByAge.map((user) => <UserCard key={user.id} user={user} />) }
       </table>
     </div>
   );
