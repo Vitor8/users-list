@@ -7,6 +7,13 @@ const INITIAl_STATE = {
 const usersListReducer = (state = INITIAl_STATE, action) => {
   switch (action.type) {
 
+  case 'CHECK_SESSION_STORAGE': {
+    return {
+      ...state,
+      usersArray: action.payload,
+    }
+  }
+
   case 'ADD_USER':
     const newUser = {
       id: state.usersArray.length,
@@ -19,6 +26,8 @@ const usersListReducer = (state = INITIAl_STATE, action) => {
       usersArray: [ ...state.usersArray, newUser],
     }
 
+    sessionStorage.setItem('usersArray', JSON.stringify(newStateADD));
+
   return newStateADD;
 
   case 'REMOVE_USER':
@@ -28,6 +37,8 @@ const usersListReducer = (state = INITIAl_STATE, action) => {
       ...state,
       usersArray: newUsersArray,
     }
+
+    sessionStorage.setItem('usersArray', JSON.stringify(newStateREMOVE));
 
   return newStateREMOVE;
 
@@ -42,6 +53,8 @@ const usersListReducer = (state = INITIAl_STATE, action) => {
       ...state,
       usersArray: updatedUsersArray,
     }
+
+    sessionStorage.setItem('usersArray', JSON.stringify(newStateUPDATED));
 
   return newStateUPDATED;
 

@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import * as userActions from '../actions/index';
 import UserCard from './UserCard';
 
-function UsersTable({ usersArray }) {
+function UsersTable({ usersArray, checkSessionStorage }) {
   const [usersArrayOrderByAge, setOrder] = useState([]);
   const [controlOrder, setControlOrder] = useState('dec');
+  const [hasCheckedSessionStorage, setHasCheckedSessionStorage] = useState(false);
+
+  useEffect(() => {
+    let savedUsers = [];
+    const savedData = JSON.parse(sessionStorage.getItem('usersArray')) || [];
+    if (savedData.length !== 0) savedUsers = savedData.usersArray;
+    checkSessionStorage(savedUsers);
+    setHasCheckedSessionStorage(true);
+  },[]);
 
   useEffect(() => {
     if (controlOrder === 'asc') orderByAgeAsc();
@@ -60,7 +70,9 @@ function UsersTable({ usersArray }) {
           <th className="table-title">-</th>
           <th className="table-title">-</th>
         </tr>
-        { usersArrayOrderByAge.map((user) => <UserCard key={user.id} user={user} />) }
+        {
+          hasCheckedSessionStorage && usersArrayOrderByAge.map((user) => <UserCard key={user.id} user={user} />)
+        }
       </table>
     </div>
   );
@@ -70,4 +82,8 @@ const mapStateToProps = (state) => ({
   usersArray: state.usersListReducer.usersArray,
 });
 
-export default connect(mapStateToProps)(UsersTable);
+const mapDispatchToProps = (dispatch) => ({
+  checkSessionStorage: (usersArray) => dispatch(userActions.checkSessionStorage(usersArray)),
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(UsersTable);
