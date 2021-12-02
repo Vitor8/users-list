@@ -2,11 +2,19 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import * as userActions from '../actions/index';
 
-function InputList({ addUser }) {
+function InputList({ addUser, usersArray }) {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
 
+  function isNameAlreadyRegistered(name) {
+    const isNameRepeated = usersArray.some((user) => user.name === name);
+    return isNameRepeated;
+  }
+
   function newUser(name, age) {
+    const isNameRepeated = isNameAlreadyRegistered(name);
+    if (isNameRepeated) return alert('Nome já regeistrado');
+
     addUser(name, age);
     setName('');
     setAge('');
@@ -48,4 +56,8 @@ const mapDispatchToProps = (dispatch) => ({
   addUser: (name, age) => dispatch(userActions.addUser(name, age)),
 });
 
-export default connect(null, mapDispatchToProps)(InputList);
+const mapStateToProps = (state) => ({
+  usersArray: state.usersListReducer.usersArray,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputList);
