@@ -5,9 +5,9 @@ import Home from '../pages/Home';
 
 import { renderWithRouterAndStore } from './testConfig';
 
-describe('1 - Crie um form para cadastro de usuários, ', () => {
+describe('Requisito 1:', () => {
 
-  test('o form deve possuir labels e campos de input para inserir nome e idade do usuário', () => {
+  test('O form deve possuir labels e campos de input para inserir nome e idade do usuário', () => {
     renderWithRouterAndStore(<Home />, '/');
     const nameLabel = screen.getByTestId("name-label");
     const ageLabel = screen.getByTestId("age-label");
@@ -20,14 +20,14 @@ describe('1 - Crie um form para cadastro de usuários, ', () => {
     expect(ageInput).toBeInTheDocument();
   });
 
-  test('o form deve possuir um botão com o texto "Salvar" para cadastrar os dados do usuário', () => {
+  test('O form deve possuir um botão com o texto "Salvar" para cadastrar os dados do usuário', () => {
     renderWithRouterAndStore(<Home />, '/');
 
     const button = screen.getByText(/Salvar/i);
     expect(button).toBeInTheDocument();
   });
 
-  test('dados do usuário devem estar visíveis após cadastro ', () => {
+  test('Dados do usuário devem estar visíveis após cadastro ', () => {
     renderWithRouterAndStore(<Home />, '/');
 
     const nameInput = screen.getByTestId("name-input");
@@ -47,9 +47,9 @@ describe('1 - Crie um form para cadastro de usuários, ', () => {
 
 });
 
-describe('2 - No formulário criado no item 1', () => {
+describe('Requisito 2:', () => {
 
-  test('não é permitido o cadastro de pessoas com mesmo nome', () => {
+  test('Não deve ser permitido o cadastro de pessoas com mesmo nome', () => {
     renderWithRouterAndStore(<Home />, '/');
 
     /* Para manipulação correta de window alert junto com o teste em Jest, consultei a seguinte thread: 
@@ -78,9 +78,9 @@ describe('2 - No formulário criado no item 1', () => {
 
 });
 
-describe('3 - Para aperfeiçoar o requisito 1', () => {
+describe('Requisito 3:', () => {
 
-  test('ordene a lista de usuários de forma decrescente pela idade', () => {
+  test('Ordene a lista de usuários de forma decrescente pela idade', () => {
     renderWithRouterAndStore(<Home />, '/');
 
     const nameInput = screen.getByTestId("name-input");
@@ -103,9 +103,9 @@ describe('3 - Para aperfeiçoar o requisito 1', () => {
 
 });
 
-describe('4 e 5 - Para aperfeiçoar o requisito 1, ', () => {
+describe('Requisitos 4 e 5:', () => {
 
-  test('crie um botão para deletar o usuário desejado', () => {
+  test('Crie um botão para deletar o usuário desejado', () => {
     const confirmSpy = jest.spyOn(window,'confirm').mockImplementation(); 
     renderWithRouterAndStore(<Home />, '/');
 
@@ -129,6 +129,63 @@ describe('4 e 5 - Para aperfeiçoar o requisito 1, ', () => {
     fireEvent.click(buttonToDelete[lastButtonIndex]);
 
     expect(confirmSpy).toHaveBeenCalledTimes(1);
+  });
+
+});
+
+describe('Requisito 6:', () => {
+
+  test('Crie um botão que permite a edição do usuário desejado', () => {
+    renderWithRouterAndStore(<Home />, '/');
+    const nameInput = screen.getByTestId("name-input");
+    const ageInput = screen.getByTestId("age-input");
+    const button = screen.getByText(/Salvar/i);
+
+    userEvent.type(nameInput, 'Jorge Luis Borges');
+    userEvent.type(ageInput, '100');
+    fireEvent.click(button);
+
+    const updateButton = screen.getAllByText(/Atualizar/i);
+    const lastUpdateButtonIndex = updateButton.length - 1;
+    fireEvent.click(updateButton[lastUpdateButtonIndex]);
+
+    const nameInputUpdating = screen.getByTestId("update-name-input");
+    const ageInputUpdating = screen.getByTestId("update-age-input");
+    const updatingButton = screen.getByTestId("update-button");
+
+    userEvent.type(nameInputUpdating, 'Diego Maradona');
+    userEvent.type(ageInputUpdating, '60');
+    fireEvent.click(updatingButton);
+
+    const updatedName = screen.getByText(/Diego Maradona/i);
+    const updatedAge = screen.getByText(/60/i);
+
+    expect(updatedName).toBeInTheDocument();
+    expect(updatedAge).toBeInTheDocument();
+  });
+
+  test('Crie um botão para cancelar a atualização', () => {
+    renderWithRouterAndStore(<Home />, '/');
+    const nameInput = screen.getByTestId("name-input");
+    const ageInput = screen.getByTestId("age-input");
+    const button = screen.getByText(/Salvar/i);
+
+    userEvent.type(nameInput, 'Gabriel Garcia Márquez');
+    userEvent.type(ageInput, '90');
+    fireEvent.click(button);
+
+    const updateButton = screen.getAllByText(/Atualizar/i);
+    const lastUpdateButtonIndex = updateButton.length - 1;
+    fireEvent.click(updateButton[lastUpdateButtonIndex]);
+
+    const cancelButton = screen.getByText(/Cancelar/i);
+    fireEvent.click(cancelButton);
+
+    const currentName = screen.getByText(/Gabriel Garcia Márquez/i);
+    const currentAge = screen.getByText(/90/i);
+
+    expect(currentName).toBeInTheDocument();
+    expect(currentAge).toBeInTheDocument();
   });
 
 });

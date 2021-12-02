@@ -57,6 +57,7 @@ function UserCard({ user, removeUser, updateUser }) {
             <input 
               type="text"
               className="update-field"
+              data-testid="update-name-input"
               placeholder="Name..."
               onChange={ (e) => setNewName(e.target.value) }
               value={ newName }
@@ -67,6 +68,7 @@ function UserCard({ user, removeUser, updateUser }) {
             <input 
               type="text"
               className="update-field"
+              data-testid="update-age-input"
               placeholder="Age..."
               onChange={ (e) => setNewAge(e.target.value) }
               value={ newAge }
@@ -79,7 +81,7 @@ function UserCard({ user, removeUser, updateUser }) {
             </button>
           </td>
           <td className="table-row">
-            <button onClick={ () => prepareToUpdateUser() } className="button-row">
+            <button onClick={ () => prepareToUpdateUser() } className="button-row" data-testid="update-button">
               Atualizar
             </button>
           </td>
