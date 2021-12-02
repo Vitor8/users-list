@@ -1,7 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { fireEvent, screen } from '@testing-library/react';
-import App from '../App';
 import Home from '../pages/Home';
 
 import { renderWithRouterAndStore } from './testConfig';
@@ -75,6 +74,61 @@ describe('2 - No formulário criado no item 1', () => {
 
     expect(savedName).toHaveLength(1);
     window.alert = jsdomAlert;  // restore the jsdom alert
+  });
+
+});
+
+describe('3 - Para aperfeiçoar o requisito 1', () => {
+
+  test('ordene a lista de usuários de forma decrescente pela idade', () => {
+    renderWithRouterAndStore(<Home />, '/');
+
+    const nameInput = screen.getByTestId("name-input");
+    const ageInput = screen.getByTestId("age-input");
+    const button = screen.getByText(/Salvar/i);
+
+    userEvent.type(nameInput, 'Júlio César');
+    userEvent.type(ageInput, '30');
+    fireEvent.click(button);
+
+    userEvent.type(nameInput, 'João Goulart');
+    userEvent.type(ageInput, '55');
+    fireEvent.click(button);
+
+    const tableColumns = screen.getAllByRole('cell');
+
+    expect(tableColumns[0]).toHaveTextContent('João Goulart');
+    expect(tableColumns[4]).toHaveTextContent('Júlio César');
+  });
+
+});
+
+describe('4 e 5 - Para aperfeiçoar o requisito 1, ', () => {
+
+  test('crie um botão para deletar o usuário desejado', () => {
+    const confirmSpy = jest.spyOn(window,'confirm').mockImplementation(); 
+    renderWithRouterAndStore(<Home />, '/');
+
+    const nameInput = screen.getByTestId("name-input");
+    const ageInput = screen.getByTestId("age-input");
+    const button = screen.getByText(/Salvar/i);
+
+    userEvent.type(nameInput, 'Napoleão Bonaparte');
+    userEvent.type(ageInput, '200');
+    fireEvent.click(button);
+
+    const savedName = screen.getByText(/Napoleão Bonaparte/i);
+    const savedAge = screen.getByText(/200/i);
+
+    expect(savedName).toBeInTheDocument();
+    expect(savedAge).toBeInTheDocument();
+
+    const buttonToDelete = screen.getAllByText(/Deletar/i);
+    const lastButtonIndex = buttonToDelete.length - 1;
+
+    fireEvent.click(buttonToDelete[lastButtonIndex]);
+
+    expect(confirmSpy).toHaveBeenCalledTimes(1);
   });
 
 });
