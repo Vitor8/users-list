@@ -1,6 +1,6 @@
-const CREATE_USER = 'CREATE_USER';
+const ADD_USER = 'ADD_USER';
 
-export const checkSessionStorage = (usersArray) => ({
-  type: CREATE_USER,
-  payload: usersArray,
+export const addUser = (name, age) => ({
+  type: ADD_USER,
+  payload: { name, age },
 });
