@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import './App.css';
 
-function App() {
+export default function App() {
   return (
     <Routes>
       <Route exact path="/" element={ <Home /> } />
@@ -11,4 +11,3 @@ function App() {
   );
 }
 
-export default App;

@@ -1,0 +1,52 @@
+.input-container {
+  background-color: rgb(224, 217, 204);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.input-card {
+  justify-content: space-evenly;
+  display: flex;
+  width: 50%;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.input-text {
+  width: 55%;
+}
+
+.save-button {
+  align-self: center;
+  margin-right: 32%;
+}
+
+.table-container {
+  width: 100%;
+}
+
+.table-title {
+  background-color: rgb(206, 193, 169);
+  font-size: 16px;
+  width: 10%;
+}
+
+.table-row {
+  background-color: rgb(231, 228, 223);
+  text-align: center;
+  font-size: 14px;
+  width: 10%;
+}
+
+.button-row {
+  font-size: 12px;
+  width: 80px;
+}
+
+.update-field {
+  width: 60px;
+  height: 13px;
+}

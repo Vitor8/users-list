@@ -1,9 +1,12 @@
 import React from 'react';
+import InputList from '../components/InputList';
+import UsersTable from '../components/UsersTable';
 
 function Home() {
   return (
     <div>
-      <p>Hello World</p>
+      <InputList />
+      <UsersTable />
     </div>
   );
 }
