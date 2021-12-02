@@ -47,3 +47,36 @@ describe('1 - Crie um form para cadastro de usuários, ', () => {
   });
 
 });
+
+describe('2 - No formulário criado no item 1', () => {
+
+  test('não é permitido o cadastro de pessoas com mesmo nome', () => {
+    renderWithRouterAndStore(<Home />, '/');
+
+    /* Para manipulação correta de window alert junto com o teste em Jest, consultei a seguinte thread: 
+      https://stackoverflow.com/questions/55088482/jest-not-implemented-window-alert
+    */
+    const jsdomAlert = window.alert;
+    window.alert = () => {}; 
+
+    const nameInput = screen.getByTestId("name-input");
+    const ageInput = screen.getByTestId("age-input");
+    const button = screen.getByText(/Salvar/i);
+
+    userEvent.type(nameInput, 'Vitor');
+    userEvent.type(ageInput, '23');
+    fireEvent.click(button);
+
+    userEvent.type(nameInput, 'Vitor');
+    userEvent.type(ageInput, '32');
+    fireEvent.click(button);
+
+    const savedName = screen.getAllByText(/Vitor/i);
+
+    expect(savedName).toHaveLength(1);
+    window.alert = jsdomAlert;  // restore the jsdom alert
+  });
+
+});
+
+

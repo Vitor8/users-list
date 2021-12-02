@@ -15,7 +15,11 @@ function InputList({ addUser, usersArray }) {
 
   function newUser(name, age) {
     const isNameRepeated = isNameAlreadyRegistered(name);
-    if (isNameRepeated) return alert('Nome já registrado');
+    if (isNameRepeated) {
+      setName('');
+      setAge(''); 
+      return alert('Nome já registrado');
+    }
 
     addUser(name, age);
     setName('');
