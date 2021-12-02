@@ -11,7 +11,7 @@ const usersListReducer = (state = INITIAl_STATE, action) => {
     const newUser = {
       id: state.usersArray.length,
       name: action.payload.name,
-      age: action.payload.age
+      age: action.payload.age,
     }
       
     const newStateADD = {
@@ -30,6 +30,20 @@ const usersListReducer = (state = INITIAl_STATE, action) => {
     }
 
   return newStateREMOVE;
+
+  case 'UPDATE_USER':
+    const updatedUsersArray = [...state.usersArray];
+    const index = updatedUsersArray.findIndex((user) => user.id === action.payload.userId);
+
+    updatedUsersArray[index].name = action.payload.newName;
+    updatedUsersArray[index].age = action.payload.newAge;
+
+    const newStateUPDATED = {
+      ...state,
+      usersArray: updatedUsersArray,
+    }
+
+  return newStateUPDATED;
 
   default:
     return state;

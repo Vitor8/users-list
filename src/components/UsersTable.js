@@ -29,6 +29,8 @@ function UsersTable({ usersArray }) {
         <tr>
           <th className="table-title">Nome</th>
           <th className="table-title">Idade</th>
+          <th className="table-title">-</th>
+          <th className="table-title">-</th>
         </tr>
         { usersArrayOrderByAgeDec.map((user) => <UserCard key={user.id} user={user} />) }
       </table>
