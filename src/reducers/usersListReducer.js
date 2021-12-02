@@ -21,6 +21,16 @@ const usersListReducer = (state = INITIAl_STATE, action) => {
 
   return newStateADD;
 
+  case 'REMOVE_USER':
+    const newUsersArray = state.usersArray.filter((user) => user.id !== action.payload);
+
+    const newStateREMOVE = {
+      ...state,
+      usersArray: newUsersArray,
+    }
+
+  return newStateREMOVE;
+
   default:
     return state;
   }
