@@ -6,6 +6,10 @@ O projeto foi feito em ReactJS, com o objetivo de criar um CRUD para uma lista d
 
 # Instruções para execução do projeto
 
+- Para executar o projeto, você pode visitar a GitHub Page do repositório, através do link: `http://Vitor8.github.io/users-list`
+
+- Também é possível executar localmente, seguindo o seguinte passo a passo.
+
 - Clone o repositório: `git clone git@github.com:Vitor8/users-list.git`
 - Entre no diretório: `cd users-list`
 - Instale as dependências: `npm install`
