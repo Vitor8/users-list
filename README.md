@@ -6,7 +6,7 @@ O projeto foi feito em ReactJS, com o objetivo de criar um CRUD para uma lista d
 
 # Instruções para execução do projeto
 
-- Clone o repositório: `git clone git@github.com:Vitor8/users-list.git
+- Clone o repositório: `git clone git@github.com:Vitor8/users-list.git`
 - Entre no diretório: `cd users-list`
 - Instale as dependências: `npm install`
 - Inicie a aplicação: `npm start`
@@ -17,27 +17,7 @@ O projeto foi feito em ReactJS, com o objetivo de criar um CRUD para uma lista d
 
 Organizei meu código no seguinte formato:
 
-src
-└── actions
-│   └── index.js
-└── reducers
-│   ├── index.js
-│   └── usersListReducer.js
-└── store
-│   └── index.js
-└── components
-│   ├── InputList.js
-│   ├── UserCard.js
-│   └── UsersTable.js
-└── css
-│   └── Home.css
-└── pages
-│   └── Home.js
-└── test
-│   └── testConfig.js
-│   └── users.test.js
-└── App.js
-└── index.js
+![Captura de tela de 2021-12-02 21-37-48](https://user-images.githubusercontent.com/24492328/144524945-fac451bb-4eec-4981-ab0d-1d19a34c05ab.png)
 
 - Nas pastas `actions`, `reducers` e `store`, estão os arquivos responsáveis por manipular o estado global da aplicação usando o Redux.
 - Na pasta `components` estão as funções que renderizam os components da aplicação.
